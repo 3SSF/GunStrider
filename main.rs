@@ -4,10 +4,13 @@ use std::sync::Once;
 
 macro_rules! using_stub_function {
     ($func_name:expr) => {
-        println!("\x1b[93mWarning\x1b[0m: Using unimplemented '\x1b[96m{}()\x1b[0m' function as stub", $func_name);
+        let timestamp = chrono::Local::now().format("%Y-%m-%dT%H:%M:%S%.6fZ").to_string();
+        println!(
+            "\x1b[38;2;145;147;150m{}  \x1b[93mWARN\x1b[0m \x1b[38;2;145;147;150m{}: \x1b[0mUsing unimplemented '\x1b[96m{}()\x1b[0m' function as stub",
+            timestamp, module_path!(), $func_name
+        );
     };
 }
-
 
 #[derive(Component)]
 struct Player;
